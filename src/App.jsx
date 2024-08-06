@@ -22,6 +22,7 @@ const App = () => {
   return (
     <>
       <Header zzz={count} />
+      <Header zzz={count} />
 
       {/* <button onClick={button}>Button</button> */}
     </>
