@@ -1,30 +1,23 @@
-import { useState } from "react";
-import Header from "./Header";
+import { useEffect, useState } from "react";
 const App = () => {
-  const obj = [
-    { id: 1, name: "ali" },
-    { id: 2, name: "mouse" },
-    { id: 3, name: "laptop" },
-  ];
+  const [count, setCount] = useState([]);
 
-  //   const obj = {
-  //     name: "ali",
-  //     gender: "male",
-  //     occupation: { first: "java", second: "python" },
-  //   };
+  const getData = async () => {
+    const res = await fetch("http://api.github.com/users");
+    const result = await res.json();
+    setCount(result);
+  };
 
-  const [count, setCount] = useState(obj);
-//   console.log(count);
-//   const button = () => {
-//     setCount(null);
-//   };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
-      <Header zzz={count} />
-      <Header zzz={count} />
-
-      {/* <button onClick={button}>Button</button> */}
+      <button>Button</button>
+      {count.map((i, index) => {
+        return <li key={index}>{i.login}</li>;
+      })}
     </>
   );
 };
